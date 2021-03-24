@@ -1,7 +1,6 @@
-var checkedNewObjectProps = [];
-
 const compareObjects = (oldValue, newValue) => {
-var key, i;	
+var key, i,
+	checkedNewObjectProps = [];
 	if (Array.isArray(oldValue) && Array.isArray(newValue)) {
 		if (oldValue.length === newValue.length) {
 			for (i = 0; i < oldValue.length; i += 1) {
@@ -29,11 +28,11 @@ var key, i;
 					return false;
 				}
 			}						
-			checkedNewObjectProps.push(newValue[key]);
+			checkedNewObjectProps.push(key);
 		}
 		for (key in newValue) {
 			//if newObject has some props left it is not equal
-			if (checkedNewObjectProps.indexOf(newValue[key]) === -1) {
+			if (checkedNewObjectProps.indexOf(key) === -1) {
 				return false;
 			}
 		}
@@ -44,10 +43,10 @@ var key, i;
 	return true;
 };
 
-const a = [];
-const b = {};
-// const a = {a: 1, b: 2, c: {ca: 3, cb: 4}};
-// const b = {a: 1, b: 2, c: {ca: 3, cb: 4}};
+// const a = [];
+// const b = {};
+const a = {a: 1, cc: 2, c: {ca: 3, cb: 4}};
+const b = {a: 1, cc: 2, c: {ca: 3, cb: 4, cc: 2}};
 // const a = {a: 1, b: 2, c: 3};
 // const b = {a: 1, b: 2, c: 3};
 // const a = [1, 2, [3, 4]];
