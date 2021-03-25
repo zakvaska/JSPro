@@ -25,7 +25,11 @@ const sharedVideo = document.getElementById('shared');
 
 // Get access to canvas node
 const canvas = document.querySelector('canvas');
+const canvasWrapper = document.getElementById('canvas-wrapper');
 const filterSelect = document.querySelector('select#filter');
+
+const videoWidth = 1280;
+const videoHeight = 720;
 
 
 // 1. Stream data
@@ -53,8 +57,8 @@ startButton.addEventListener('click', () => {
         const constraints = {
             audio: true,
             video: {
-                width: 1280,
-                height: 720
+                width: videoWidth,
+                height: videoHeight
             }
         }
         init(constraints);
@@ -125,9 +129,12 @@ playButton.addEventListener('click', () => {
 
 // 4. Take snapshot
 snapshotButton.addEventListener('click', () => {
-    canvas.className = filterSelect.value;
-    canvas.width = 375;
-    canvas.height = 205;
+    canvas.className = filterSelect.value;        
+    const ratio = videoWidth / videoHeight;
+    const padding = Number(window.getComputedStyle(gumVideo).paddingTop.replace('px', ''))
+    canvas.height = gumVideo.getBoundingClientRect().height - (padding * 2);
+    canvas.width = canvas.height * ratio;
+    canvas.style.maxWidth = `${canvasWrapper.getBoundingClientRect().width}px`;
     canvas.getContext('2d').drawImage(gumVideo, 0, 0, canvas.width, canvas.height);
 })
 
