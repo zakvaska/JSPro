@@ -1,9 +1,5 @@
+const Summary = ({ totalScore, bestScore }) => {
 
-
-const Summary = () => {
-
-const totalScore = 1000;
-const bestScore = 2000;
   return (
     <header className='row justify-content-center'>
       <h1 className='col-5 logo fw-bold text-end '>
